@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="theme-color" content="#0f172a">
+  <title>キャスト表彰制度 ルール確認</title>
+  <link rel="icon" href="data:,">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"Noto Sans JP"', '-apple-system', 'BlinkMacSystemFont', '"Hiragino Sans"', '"Yu Gothic UI"', 'sans-serif'],
+          },
+          borderRadius: {
+            'lg': '0.625rem',
+            'xl': '0.875rem',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 132px; }
+    body {
+      -webkit-text-size-adjust: 100%;
+      font-feature-settings: "palt";
+      letter-spacing: 0.005em;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tab[data-active="true"] { color: rgb(15 23 42); }
+    .tab[data-active="true"]::after {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      right: 0.75rem;
+      bottom: -1px;
+      height: 2px;
+      background: rgb(15 23 42);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .panel { display: none; }
+    .panel[data-active="true"] {
+      display: block;
+      animation: fadeIn .25s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .chevron { transform: rotate(180deg); }
+    .chevron { transition: transform .2s ease; }
+
+    .tabular { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased leading-relaxed">
+
+<header class="sticky top-0 z-30 border-b border-slate-200/80 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+  <div class="mx-auto max-w-3xl px-4 py-3">
+    <div class="flex items-center gap-3">
+      <div class="grid h-9 w-9 place-items-center rounded-lg bg-slate-900 text-white text-sm font-bold shrink-0">★</div>
+      <div class="flex-1 min-w-0">
+        <h1 class="text-[15px] font-bold tracking-tight text-slate-900 truncate">キャスト表彰制度 ルール確認</h1>
+        <p class="text-[11px] text-slate-500 mt-0.5">上期 2026 ・ 次の期間: 投票フォーム準備（6/25〜）</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky top-[60px] z-20 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+  <div class="mx-auto max-w-3xl">
+    <div class="flex no-scrollbar overflow-x-auto px-2" role="tablist">
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="overview" data-active="true" role="tab">概要</button>
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="schedule" role="tab">スケジュール</button>
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="points" role="tab">ポイント</button>
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="awards" role="tab">表彰内容</button>
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="amend" role="tab">修正申請</button>
+      <button class="tab relative shrink-0 px-3 py-3 text-[13px] font-semibold text-slate-500 transition-colors hover:text-slate-900" data-tab="faq" role="tab">FAQ</button>
+    </div>
+  </div>
+</nav>
+
+<main class="mx-auto max-w-3xl px-4 py-6 pb-24">
+
+  <section class="panel" id="panel-overview" data-active="true">
+    <div class="mb-6">
+      <div class="inline-flex items-center gap-1.5 rounded-full bg-slate-900/5 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        現在: 上期 2026
+      </div>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-slate-900">表彰制度の概要</h2>
+      <p class="mt-1.5 text-sm text-slate-500">制度の全体像です。期ごとの主要な期間を確認できます。</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">対象期間</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">1月〜6月</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 7月〜12月</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">集計期間</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">7/1〜7/15</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 1/1〜1/15</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">投票期間</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">7/1〜7/15</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 1/1〜1/15</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">修正申請</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">7/16〜7/22</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 1/16〜1/22</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">確定時期</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">7/23〜7/31</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 1/23〜1/31</div>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">表彰式</div>
+        <div class="mt-1 text-[15px] font-bold text-slate-900 tabular">8/16〜8/31</div>
+        <div class="text-[11px] text-slate-500 tabular">下期: 2/16〜2月末</div>
+      </div>
+    </div>
+
+    <div class="mt-5 rounded-xl border border-amber-200/70 bg-amber-50/80 p-4 text-sm text-amber-900">
+      <div class="flex gap-2.5">
+        <svg class="h-4 w-4 shrink-0 mt-0.5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p class="leading-relaxed">確定前の個人順位・個人点数・勤怠回数は公開されません。詳細は各タブで確認できます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-schedule">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">スケジュール</h2>
+      <p class="mt-1.5 text-sm text-slate-500">上期・下期で同じフローを繰り返します。下のボタンで切り替え。</p>
+    </div>
+
+    <div class="inline-flex rounded-xl bg-slate-100 p-1 mb-5 w-full">
+      <button class="term flex-1 rounded-lg px-3 py-2 text-[13px] font-semibold text-slate-500 transition data-[active=true]:bg-white data-[active=true]:text-slate-900 data-[active=true]:shadow-sm" data-term="first" data-active="true">上期（6月〜8月）</button>
+      <button class="term flex-1 rounded-lg px-3 py-2 text-[13px] font-semibold text-slate-500 transition data-[active=true]:bg-white data-[active=true]:text-slate-900 data-[active=true]:shadow-sm" data-term="second">下期（12月〜2月）</button>
+    </div>
+
+    <div class="timeline space-y-3" data-term="first">
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">6月25日 〜 6月30日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">投票フォーム準備・投票対象候補整理</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-900 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-900/10 bg-slate-900 text-white p-4 shadow-sm mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-300 tabular">7月1日 〜 7月15日</div>
+          <div class="mt-1 text-[14px] font-semibold">売上・勤怠・ポイント集計、投票回収</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">重要</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-900 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-900/10 bg-slate-900 text-white p-4 shadow-sm mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-300 tabular">7月16日 〜 7月22日</div>
+          <div class="mt-1 text-[14px] font-semibold">調整・修正申請</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">修正受付</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">7月23日 〜 7月31日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">最終確認・確定、制作物・媒体露出準備</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">8月1日 〜 8月15日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">誓約書・諸確認</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-amber-500 ring-4 ring-white"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-amber-300/70 bg-gradient-to-br from-amber-50 to-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="text-[11px] font-semibold tracking-wider text-amber-700 tabular">8月16日 〜 8月31日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">表彰式</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">本番</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline space-y-3 hidden" data-term="second">
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">12月25日 〜 12月31日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">投票フォーム準備・投票対象候補整理</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-900 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-900/10 bg-slate-900 text-white p-4 shadow-sm mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-300 tabular">1月1日 〜 1月15日</div>
+          <div class="mt-1 text-[14px] font-semibold">売上・勤怠・ポイント集計、投票回収</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">重要</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-900 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-900/10 bg-slate-900 text-white p-4 shadow-sm mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-300 tabular">1月16日 〜 1月22日</div>
+          <div class="mt-1 text-[14px] font-semibold">調整・修正申請</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">修正受付</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">1月23日 〜 1月31日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">最終確認・確定、制作物・媒体露出準備</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-slate-300 ring-4 ring-white"></div>
+          <div class="w-px flex-1 bg-slate-200 mt-1"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] mb-1">
+          <div class="text-[11px] font-semibold tracking-wider text-slate-500 tabular">2月1日 〜 2月15日</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">誓約書・諸確認</div>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <div class="flex flex-col items-center pt-1.5">
+          <div class="h-2.5 w-2.5 rounded-full bg-amber-500 ring-4 ring-white"></div>
+        </div>
+        <div class="flex-1 rounded-xl border border-amber-300/70 bg-gradient-to-br from-amber-50 to-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="text-[11px] font-semibold tracking-wider text-amber-700 tabular">2月16日 〜 2月末</div>
+          <div class="mt-1 text-[14px] font-semibold text-slate-900">表彰式</div>
+          <div class="mt-2 inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">本番</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-points">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">ポイントの決まり方</h2>
+      <p class="mt-1.5 text-sm text-slate-500">勤怠と役職は点数が決まっています。それ以外は評価項目として加味されます。</p>
+    </div>
+
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="h-5 w-1 rounded-full bg-slate-900"></div>
+        <h3 class="text-[15px] font-bold text-slate-900">勤怠ポイント</h3>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-center justify-between gap-4 p-4 border-b border-slate-100">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">当欠</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">通常当欠・2%当欠</div>
+          </div>
+          <div class="text-[14px] font-bold text-rose-600 tabular whitespace-nowrap">-100,000pt</div>
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4 border-b border-slate-100">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">遅刻・早退</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">遅刻または早退</div>
+          </div>
+          <div class="text-[14px] font-bold text-rose-600 tabular whitespace-nowrap">-50,000pt</div>
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4 border-b border-slate-100">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">皆勤賞</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">月20日以上出勤、無遅刻・無欠勤・無早退</div>
+          </div>
+          <div class="text-[14px] font-bold text-emerald-600 tabular whitespace-nowrap">+300,000pt</div>
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">出勤15日以上</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">月15日以上出勤</div>
+          </div>
+          <div class="text-[14px] font-bold text-emerald-600 tabular whitespace-nowrap">+100,000pt</div>
+        </div>
+      </div>
+      <div class="mt-3 rounded-lg bg-slate-100/70 border border-slate-200 px-4 py-3 text-[12px] text-slate-600 leading-relaxed">
+        <span class="font-semibold text-slate-700">15日以上出勤と皆勤賞は両取り可能。</span>減点により合計がマイナスになっても、その値が最終ポイントになります。
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="h-5 w-1 rounded-full bg-slate-900"></div>
+        <h3 class="text-[15px] font-bold text-slate-900">役職ポイント</h3>
+      </div>
+      <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-center justify-between gap-4 p-4 border-b border-slate-100">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">店長</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">対象期間中の役職</div>
+          </div>
+          <div class="text-[14px] font-bold text-emerald-600 tabular whitespace-nowrap">+1,000,000pt</div>
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4 border-b border-slate-100">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">副店長</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">対象期間中の役職</div>
+          </div>
+          <div class="text-[14px] font-bold text-emerald-600 tabular whitespace-nowrap">+500,000pt</div>
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4">
+          <div>
+            <div class="text-[14px] font-semibold text-slate-900">キャストMGR</div>
+            <div class="text-[12px] text-slate-500 mt-0.5">月1回以上の店責</div>
+          </div>
+          <div class="text-[14px] font-bold text-emerald-600 tabular whitespace-nowrap">+250,000pt</div>
+        </div>
+      </div>
+      <div class="mt-3 rounded-lg bg-slate-100/70 border border-slate-200 px-4 py-3 text-[12px] text-slate-600 leading-relaxed">
+        対象期間の途中で役職を外れた場合、役職ポイントは <span class="font-semibold text-slate-700">0pt</span> になります。
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <div class="h-5 w-1 rounded-full bg-slate-900"></div>
+        <h3 class="text-[15px] font-bold text-slate-900">その他の評価項目</h3>
+      </div>
+      <div class="grid gap-2">
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">売上実績</div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">指定会議への参加</div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">指定会議への遠隔参加</div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">A指定イベント・撮影参加</div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">B指定イベント・撮影参加</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3">
+            <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+            <div class="text-[14px] font-semibold text-slate-900">全員投票</div>
+          </div>
+          <div class="text-[12px] text-slate-500 mt-1 ml-[18px]">キャスト・バックヤードを含む</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3">
+            <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+            <div class="text-[14px] font-semibold text-slate-900">TOP投票</div>
+          </div>
+          <div class="text-[12px] text-slate-500 mt-1 ml-[18px]">そーた・チロル・mona・あめが投票対象者</div>
+        </div>
+        <div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0"></div>
+          <div class="text-[14px] font-semibold text-slate-900">特別賞対象の活動</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-awards">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">表彰内容</h2>
+      <p class="mt-1.5 text-sm text-slate-500">賞金・ローズ・露出内容を確認できます。</p>
+    </div>
+
+    <div class="inline-flex rounded-xl bg-slate-100 p-1 mb-5 w-full">
+      <button class="award-tab flex-1 rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-500 transition data-[active=true]:bg-white data-[active=true]:text-slate-900 data-[active=true]:shadow-sm" data-award="total" data-active="true">総合</button>
+      <button class="award-tab flex-1 rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-500 transition data-[active=true]:bg-white data-[active=true]:text-slate-900 data-[active=true]:shadow-sm" data-award="store">店舗別</button>
+      <button class="award-tab flex-1 rounded-lg px-3 py-2 text-[12px] font-semibold text-slate-500 transition data-[active=true]:bg-white data-[active=true]:text-slate-900 data-[active=true]:shadow-sm" data-award="special">特別賞</button>
+    </div>
+
+    <div data-award-panel="total">
+      <div class="space-y-2">
+        <div class="rounded-xl border border-amber-300/60 bg-gradient-to-br from-amber-50 via-amber-50/60 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-amber-500 text-white font-bold text-sm shadow-md shrink-0">1位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">賞金 100万円</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">トロフィー</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">OOH</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-300/60 bg-gradient-to-br from-slate-100 via-slate-50 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-slate-300 to-slate-400 text-white font-bold text-sm shadow-md shrink-0">2位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">賞金 20万円</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">トロフィー</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">OOH</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-orange-300/60 bg-gradient-to-br from-orange-50 via-orange-50/60 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-orange-400 to-amber-700 text-white font-bold text-sm shadow-md shrink-0">3位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">賞金 10万円</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">トロフィー</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">OOH</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-700 font-bold text-[12px] shrink-0">4位</div>
+            <div class="text-[15px] font-bold text-slate-900 tabular">賞金 5万円</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">トロフィー</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">賞状</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">映像</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">ロズリン特集</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">OOH</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-700 font-bold text-[12px] shrink-0">5位</div>
+            <div class="text-[15px] font-bold text-slate-900 tabular">賞金 3万円</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">トロフィー</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">賞状</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">映像</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">ロズリン特集</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">OOH</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <div class="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-600 font-bold text-[11px] shrink-0">6位</div>
+              <div class="text-[14px] font-bold text-slate-900 tabular">25,000ローズ</div>
+            </div>
+            <div class="text-[11px] text-slate-500">+ 賞状/映像/ロズリン特集/OOH</div>
+          </div>
+          <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <div class="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-600 font-bold text-[11px] shrink-0">7位</div>
+              <div class="text-[14px] font-bold text-slate-900 tabular">20,000ローズ</div>
+            </div>
+            <div class="text-[11px] text-slate-500">+ 賞状/映像/ロズリン特集/OOH</div>
+          </div>
+          <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <div class="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-600 font-bold text-[11px] shrink-0">8位</div>
+              <div class="text-[14px] font-bold text-slate-900 tabular">15,000ローズ</div>
+            </div>
+            <div class="text-[11px] text-slate-500">+ 賞状/映像/ロズリン特集/OOH</div>
+          </div>
+          <div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+              <div class="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-600 font-bold text-[11px] shrink-0">9位</div>
+              <div class="text-[14px] font-bold text-slate-900 tabular">10,000ローズ</div>
+            </div>
+            <div class="text-[11px] text-slate-500">+ 賞状/映像/ロズリン特集/OOH</div>
+          </div>
+          <div class="flex items-center justify-between gap-3 px-4 py-3">
+            <div class="flex items-center gap-3">
+              <div class="grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-600 font-bold text-[11px] shrink-0">10位</div>
+              <div class="text-[14px] font-bold text-slate-900 tabular">5,000ローズ</div>
+            </div>
+            <div class="text-[11px] text-slate-500">+ 賞状/映像/ロズリン特集/OOH</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-award-panel="store" class="hidden">
+      <div class="rounded-lg bg-blue-50/70 border border-blue-200/70 px-4 py-3 text-[12px] text-blue-900 mb-4 leading-relaxed">
+        <span class="font-semibold">各店舗10名を対象。</span> メイン店舗を基準とし、RoseLink準拠で判定します。
+      </div>
+      <div class="space-y-2">
+        <div class="rounded-xl border border-amber-300/60 bg-gradient-to-br from-amber-50 via-amber-50/60 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-amber-500 text-white font-bold text-sm shadow-md shrink-0">1位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">25,000ローズ</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">トロフィー</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">媒体露出</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-300/60 bg-gradient-to-br from-slate-100 via-slate-50 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-slate-300 to-slate-400 text-white font-bold text-sm shadow-md shrink-0">2位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">20,000ローズ</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">媒体露出</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-orange-300/60 bg-gradient-to-br from-orange-50 via-orange-50/60 to-white p-4 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-orange-400 to-amber-700 text-white font-bold text-sm shadow-md shrink-0">3位</div>
+            <div class="text-[18px] font-bold text-slate-900 tabular">15,000ローズ</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">賞状</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">映像</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">ロズリン特集</span>
+            <span class="rounded-md bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-700">媒体露出</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-700 font-bold text-[12px] shrink-0">4位</div>
+            <div class="text-[15px] font-bold text-slate-900 tabular">10,000ローズ</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">賞状</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">映像</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">ロズリン特集</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">媒体露出</span>
+          </div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-700 font-bold text-[12px] shrink-0">5位</div>
+            <div class="text-[15px] font-bold text-slate-900 tabular">5,000ローズ</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">賞状</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">映像</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">ロズリン特集</span>
+            <span class="rounded-md bg-slate-50 border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600">媒体露出</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-award-panel="special" class="hidden">
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] text-center">
+          <div class="inline-flex rounded-md bg-slate-900 text-white px-2 py-0.5 text-[10px] font-bold mb-2">皆勤賞</div>
+          <div class="text-[11px] font-semibold text-slate-500">1位</div>
+          <div class="text-[18px] font-bold text-slate-900 tabular mt-1">賞金 10万円</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] text-center">
+          <div class="inline-flex rounded-md bg-slate-900 text-white px-2 py-0.5 text-[10px] font-bold mb-2">アプリ</div>
+          <div class="text-[11px] font-semibold text-slate-500">1位</div>
+          <div class="text-[18px] font-bold text-slate-900 tabular mt-1">賞金 5万円</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] text-center">
+          <div class="inline-flex rounded-md bg-slate-900 text-white px-2 py-0.5 text-[10px] font-bold mb-2">UGC</div>
+          <div class="text-[11px] font-semibold text-slate-500">1位</div>
+          <div class="text-[18px] font-bold text-slate-900 tabular mt-1">賞金 5万円</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)] text-center">
+          <div class="inline-flex rounded-md bg-slate-900 text-white px-2 py-0.5 text-[10px] font-bold mb-2">TikTok</div>
+          <div class="text-[11px] font-semibold text-slate-500">1位</div>
+          <div class="text-[18px] font-bold text-slate-900 tabular mt-1">賞金 5万円</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-amend">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">修正申請ルール</h2>
+      <p class="mt-1.5 text-sm text-slate-500">勤怠や売上、参加実績などに誤りがある場合の申請ルールです。</p>
+    </div>
+
+    <div class="rounded-xl border border-rose-200/70 bg-rose-50/60 p-4 mb-5">
+      <div class="flex gap-2.5">
+        <svg class="h-4 w-4 shrink-0 mt-0.5 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="text-[13px] text-rose-900 leading-relaxed"><span class="font-bold">期限後の申請は原則無効。</span> 修正申請期間内（上期: 7/16〜7/22 / 下期: 1/16〜1/22）に提出してください。</p>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">1</div>
+          <div class="flex-1 text-[14px] text-slate-900 leading-relaxed">
+            修正申請は <span class="font-semibold">各期の修正申請期間内のみ</span> 受け付けます。
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">2</div>
+          <div class="flex-1 text-[14px] text-slate-900 leading-relaxed">
+            対象は、勤怠修正、売上紐づけ修正、参加実績修正など。
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">3</div>
+          <div class="flex-1">
+            <div class="text-[14px] text-slate-900 leading-relaxed mb-3">申請には次の情報が必要です。</div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="flex items-center gap-2 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-[12px] font-semibold text-slate-700">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>該当日
+              </div>
+              <div class="flex items-center gap-2 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-[12px] font-semibold text-slate-700">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>対象店舗
+              </div>
+              <div class="flex items-center gap-2 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-[12px] font-semibold text-slate-700">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>対象キャスト
+              </div>
+              <div class="flex items-center gap-2 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-[12px] font-semibold text-slate-700">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>修正理由
+              </div>
+              <div class="col-span-2 flex items-center gap-2 rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-[12px] font-semibold text-slate-700">
+                <span class="h-1.5 w-1.5 rounded-full bg-slate-400"></span>証跡
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">4</div>
+          <div class="flex-1 text-[14px] text-slate-900 leading-relaxed">
+            期限後の申請は <span class="font-semibold">原則無効</span> となります。
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">5</div>
+          <div class="flex-1 text-[14px] text-slate-900 leading-relaxed">
+            運営側の <span class="font-semibold">明白な集計ミス</span> は例外として修正可能です。
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div class="flex items-start gap-3">
+          <div class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">6</div>
+          <div class="flex-1 text-[14px] text-slate-900 leading-relaxed">
+            集計確定後の順位変更は <span class="font-semibold">原則行いません</span>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-faq">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">FAQ</h2>
+      <p class="mt-1.5 text-sm text-slate-500">よくある質問をまとめました。タップで開閉できます。</p>
+    </div>
+
+    <div class="space-y-2">
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">BD・個人イベント売上はどう扱う？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">通常営業売上とは分けて整理します。最終的にどの賞へどこまで反映するかは、公式告知で明示します。</div>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">総合と店舗別で順位が違うのはなぜ？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">総合は全体評価、店舗別は店舗ごとの実績で見るためです。兼任者は店舗ごとの実績で集計します。</div>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">勤怠はどう反映される？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">既存の勤怠定義を使用します。勤怠修正は集計締切・修正期間と同じタイミングで締め切られます。</div>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">点数がマイナスになることはある？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">あります。減点により合計がマイナスになっても、その値を最終ポイントとして扱います。</div>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">重複受賞はできる？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">できます。各賞の重複受賞は可能です。</div>
+        </div>
+      </details>
+
+      <details class="group rounded-xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+        <summary class="flex items-center gap-3 p-4 cursor-pointer">
+          <span class="grid h-6 w-6 place-items-center rounded-md bg-slate-900 text-white text-[11px] font-bold shrink-0">Q</span>
+          <span class="flex-1 text-[14px] font-semibold text-slate-900">役職を途中でやめた場合は？</span>
+          <svg class="chevron h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </summary>
+        <div class="px-4 pb-4 pl-[52px]">
+          <div class="text-[13px] text-slate-600 leading-relaxed">役職ポイントは <span class="font-semibold text-slate-900">0pt</span> になります。</div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="mx-auto max-w-3xl px-4 py-8 text-center text-[11px] text-slate-400 border-t border-slate-200 mt-12">
+  キャスト表彰制度 ルール確認 / 最終更新: 2026-05-26
+</footer>
+
+<button id="toTop" class="fixed bottom-5 right-5 z-40 grid h-11 w-11 place-items-center rounded-full bg-slate-900 text-white shadow-lg transition-all opacity-0 pointer-events-none data-[visible=true]:opacity-100 data-[visible=true]:pointer-events-auto active:scale-95">
+  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.dataset.active = t === tab);
+      panels.forEach(p => p.dataset.active = p.id === `panel-${target}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  document.querySelectorAll('.term').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const term = btn.dataset.term;
+      document.querySelectorAll('.term').forEach(b => b.dataset.active = b === btn);
+      document.querySelectorAll('[data-term]').forEach(el => {
+        if (el.classList.contains('term')) return;
+        el.classList.toggle('hidden', el.dataset.term !== term);
+      });
+    });
+  });
+
+  document.querySelectorAll('.award-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const award = btn.dataset.award;
+      document.querySelectorAll('.award-tab').forEach(b => b.dataset.active = b === btn);
+      document.querySelectorAll('[data-award-panel]').forEach(el => {
+        el.classList.toggle('hidden', el.dataset.awardPanel !== award);
+      });
+    });
+  });
+
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.dataset.visible = window.scrollY > 400;
+  }, { passive: true });
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
