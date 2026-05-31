@@ -383,9 +383,6 @@ function LoginScreen({ authError }) {
           キャスト表彰制度
         </div>
         <h1 className="text-xl font-bold">Googleログインが必要です</h1>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          閲覧できるアカウントは、管理用スプレッドシートのユーザー一覧で確認します。
-        </p>
         {message ? (
           <p className="mt-3 rounded border border-red-200 bg-red-50 p-3 text-sm font-semibold leading-6 text-red-700">
             {message}
