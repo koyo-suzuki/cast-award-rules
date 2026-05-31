@@ -3,10 +3,10 @@ import crypto from "node:crypto";
 const DEFAULT_SPREADSHEET_ID = "1p5UgsepNsDkB8Z_V-pEw7nmleHQHKSMaUE7bDT8nFgY";
 const DEFAULT_USERS_RANGE = "config_users!A:F";
 const SESSION_COOKIE = "cast_award_session";
-const STATE_COOKIE = "cast_award_oauth_state";
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
 
 let sheetsTokenCache = null;
+let serviceAccountCache = null;
 
 function base64url(input) {
   return Buffer.from(input).toString("base64url");
@@ -52,29 +52,6 @@ export function clearCookie(name, req) {
   return cookie(name, "", req, { maxAge: 0 });
 }
 
-export function getBaseUrl(req) {
-  if (process.env.AUTH_BASE_URL) return process.env.AUTH_BASE_URL.replace(/\/$/, "");
-  const host = req.headers["x-forwarded-host"] || req.headers.host;
-  const protocol = req.headers["x-forwarded-proto"] || "http";
-  return `${protocol}://${host}`;
-}
-
-export function getRedirectUri(req) {
-  return process.env.GOOGLE_REDIRECT_URI || `${getBaseUrl(req)}/api/auth/callback`;
-}
-
-export function createStateCookie(req) {
-  const state = crypto.randomBytes(24).toString("base64url");
-  return {
-    state,
-    header: cookie(STATE_COOKIE, state, req, { maxAge: 10 * 60 }),
-  };
-}
-
-export function validateState(req, state) {
-  return Boolean(state && parseCookies(req)[STATE_COOKIE] === state);
-}
-
 export function sessionCookie(payload, req) {
   const token = signSession(payload);
   return cookie(SESSION_COOKIE, token, req, { maxAge: SESSION_TTL_SECONDS });
@@ -87,8 +64,8 @@ export function readSession(req) {
 }
 
 function sessionSecret() {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) throw new Error("SESSION_SECRET is not set");
+  const secret = process.env.SESSION_SECRET || process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+  if (!secret) throw new Error("Session signing secret is not set");
   return secret;
 }
 
@@ -120,28 +97,6 @@ function verifySession(token) {
   }
   if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;
   return payload;
-}
-
-export async function exchangeGoogleCode(req, code) {
-  const body = new URLSearchParams({
-    code,
-    client_id: requiredEnv("GOOGLE_CLIENT_ID"),
-    client_secret: requiredEnv("GOOGLE_CLIENT_SECRET"),
-    redirect_uri: getRedirectUri(req),
-    grant_type: "authorization_code",
-  });
-
-  const response = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body,
-  });
-
-  if (!response.ok) {
-    throw new Error(`Google token exchange failed: ${response.status}`);
-  }
-
-  return response.json();
 }
 
 export async function verifyGoogleIdToken(idToken) {
@@ -189,19 +144,13 @@ export async function findAllowedUser(email) {
 }
 
 async function readUsersSheet() {
-  const spreadsheetId = process.env.AUTH_SPREADSHEET_ID || DEFAULT_SPREADSHEET_ID;
+  const spreadsheetId = process.env.CONFIG_SPREADSHEET_ID || process.env.AUTH_SPREADSHEET_ID || DEFAULT_SPREADSHEET_ID;
   const range = process.env.AUTH_USERS_RANGE || DEFAULT_USERS_RANGE;
   const params = new URLSearchParams({ majorDimension: "ROWS" });
   const encodedRange = encodeURIComponent(range);
-  const headers = {};
-
-  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
-    headers.Authorization = `Bearer ${await serviceAccountAccessToken()}`;
-  } else if (process.env.GOOGLE_SHEETS_API_KEY) {
-    params.set("key", process.env.GOOGLE_SHEETS_API_KEY);
-  } else {
-    throw new Error("Google Sheets credentials are not set");
-  }
+  const headers = {
+    Authorization: `Bearer ${await serviceAccountAccessToken()}`,
+  };
 
   const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodedRange}?${params}`, {
     headers,
@@ -217,15 +166,16 @@ async function serviceAccountAccessToken() {
 
   const now = Math.floor(Date.now() / 1000);
   const assertionHeader = { alg: "RS256", typ: "JWT" };
+  const serviceAccount = getServiceAccount();
   const assertionPayload = {
-    iss: requiredEnv("GOOGLE_SERVICE_ACCOUNT_EMAIL"),
+    iss: serviceAccount.client_email,
     scope: "https://www.googleapis.com/auth/spreadsheets.readonly",
     aud: "https://oauth2.googleapis.com/token",
     exp: now + 3600,
     iat: now,
   };
   const unsigned = `${base64url(JSON.stringify(assertionHeader))}.${base64url(JSON.stringify(assertionPayload))}`;
-  const privateKey = requiredEnv("GOOGLE_PRIVATE_KEY").replace(/\\n/g, "\n");
+  const privateKey = serviceAccount.private_key.replace(/\\n/g, "\n");
   const signature = crypto.createSign("RSA-SHA256").update(unsigned).sign(privateKey, "base64url");
   const assertion = `${unsigned}.${signature}`;
 
@@ -247,6 +197,25 @@ async function serviceAccountAccessToken() {
   return sheetsTokenCache.token;
 }
 
+function getServiceAccount() {
+  if (serviceAccountCache) return serviceAccountCache;
+
+  const raw = requiredEnv("GOOGLE_SERVICE_ACCOUNT_KEY");
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY must be a JSON service account key");
+  }
+
+  if (!parsed.client_email || !parsed.private_key) {
+    throw new Error("GOOGLE_SERVICE_ACCOUNT_KEY is missing client_email or private_key");
+  }
+
+  serviceAccountCache = parsed;
+  return serviceAccountCache;
+}
+
 export function redirect(res, location, headers = {}) {
   res.statusCode = 302;
   res.setHeader("Location", location);
@@ -266,4 +235,4 @@ export function sendJson(res, status, body) {
   jsonResponse(res, status, body);
 }
 
-export { SESSION_COOKIE, STATE_COOKIE };
+export { SESSION_COOKIE };

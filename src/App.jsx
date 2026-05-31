@@ -9,10 +9,30 @@ import {
   ShieldCheck,
   Trophy,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "./lib/utils";
 
 const AUTH_REQUIRED = import.meta.env.PROD && import.meta.env.VITE_REQUIRE_AUTH !== "false";
+const GOOGLE_SCRIPT_SRC = "https://accounts.google.com/gsi/client";
+
+let googleScriptPromise = null;
+
+function loadGoogleScript() {
+  if (window.google?.accounts?.id) return Promise.resolve();
+  if (googleScriptPromise) return googleScriptPromise;
+
+  googleScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = GOOGLE_SCRIPT_SRC;
+    script.async = true;
+    script.defer = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  return googleScriptPromise;
+}
 
 const navItems = [
   ["ranking", "ランキング"],
@@ -297,6 +317,63 @@ function LoginScreen({ authError }) {
     invalid: "ログイン状態の確認に失敗しました。もう一度ログインしてください。",
     error: "ログイン処理中にエラーが発生しました。",
   };
+  const buttonRef = useRef(null);
+  const [message, setMessage] = useState(authError ? messages[authError] || messages.error : "");
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function setupGoogleLogin() {
+      try {
+        const configResponse = await fetch("/api/auth/config");
+        const config = await configResponse.json();
+        if (!config.clientId) throw new Error("GOOGLE_CLIENT_ID is not set");
+
+        await loadGoogleScript();
+        if (cancelled || !buttonRef.current) return;
+
+        window.google.accounts.id.initialize({
+          client_id: config.clientId,
+          callback: async ({ credential }) => {
+            setMessage("");
+
+            const response = await fetch("/api/auth/google", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify({ credential }),
+            });
+
+            if (response.ok) {
+              window.location.replace("/");
+              return;
+            }
+
+            setMessage(response.status === 403 ? messages.denied : messages.invalid);
+          },
+        });
+
+        const buttonWidth = Math.min(320, buttonRef.current.offsetWidth || 320);
+        window.google.accounts.id.renderButton(buttonRef.current, {
+          theme: "outline",
+          size: "large",
+          text: "signin_with",
+          shape: "rectangular",
+          width: buttonWidth,
+        });
+        setIsReady(true);
+      } catch {
+        if (!cancelled) setMessage("ログイン設定を確認できませんでした。");
+      }
+    }
+
+    setupGoogleLogin();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 text-slate-950">
@@ -309,17 +386,13 @@ function LoginScreen({ authError }) {
         <p className="mt-2 text-sm leading-6 text-slate-600">
           閲覧できるアカウントは、管理用スプレッドシートのユーザー一覧で確認します。
         </p>
-        {authError ? (
+        {message ? (
           <p className="mt-3 rounded border border-red-200 bg-red-50 p-3 text-sm font-semibold leading-6 text-red-700">
-            {messages[authError] || messages.error}
+            {message}
           </p>
         ) : null}
-        <a
-          href="/api/auth/start"
-          className="mt-4 flex h-11 w-full items-center justify-center rounded bg-teal-700 text-sm font-bold text-white hover:bg-teal-800"
-        >
-          Googleでログイン
-        </a>
+        <div className="mt-4 flex min-h-11 justify-center" ref={buttonRef} />
+        {!isReady ? <p className="mt-3 text-center text-xs font-semibold text-slate-500">ログインボタンを準備しています</p> : null}
       </div>
     </div>
   );
