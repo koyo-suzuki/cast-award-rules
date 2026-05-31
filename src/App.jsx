@@ -9,8 +9,10 @@ import {
   ShieldCheck,
   Trophy,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "./lib/utils";
+
+const AUTH_REQUIRED = import.meta.env.PROD && import.meta.env.VITE_REQUIRE_AUTH !== "false";
 
 const navItems = [
   ["ranking", "ランキング"],
@@ -289,7 +291,65 @@ function MobileScheduleList({ rows }) {
   );
 }
 
-function App() {
+function LoginScreen({ authError }) {
+  const messages = {
+    denied: "このGoogleアカウントは閲覧対象に含まれていません。",
+    invalid: "ログイン状態の確認に失敗しました。もう一度ログインしてください。",
+    error: "ログイン処理中にエラーが発生しました。",
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 text-slate-950">
+      <div className="w-full max-w-sm rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-4 flex items-center gap-2 text-sm font-bold text-teal-900">
+          <span className="flex h-8 w-8 items-center justify-center rounded bg-teal-700 text-xs text-white">AW</span>
+          キャスト表彰制度
+        </div>
+        <h1 className="text-xl font-bold">Googleログインが必要です</h1>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          閲覧できるアカウントは、管理用スプレッドシートのユーザー一覧で確認します。
+        </p>
+        {authError ? (
+          <p className="mt-3 rounded border border-red-200 bg-red-50 p-3 text-sm font-semibold leading-6 text-red-700">
+            {messages[authError] || messages.error}
+          </p>
+        ) : null}
+        <a
+          href="/api/auth/start"
+          className="mt-4 flex h-11 w-full items-center justify-center rounded bg-teal-700 text-sm font-bold text-white hover:bg-teal-800"
+        >
+          Googleでログイン
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function AuthGate({ children }) {
+  const [state, setState] = useState(AUTH_REQUIRED ? "loading" : "ready");
+  const authError = new URLSearchParams(window.location.search).get("auth");
+
+  useEffect(() => {
+    if (!AUTH_REQUIRED) return;
+
+    fetch("/api/me", { credentials: "include" })
+      .then((response) => {
+        setState(response.ok ? "ready" : "login");
+      })
+      .catch(() => setState("login"));
+  }, []);
+
+  if (state === "ready") return children;
+  if (state === "login") return <LoginScreen authError={authError} />;
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 text-sm font-bold text-slate-600">
+      ログイン状態を確認しています
+    </div>
+  );
+}
+
+function RulesPage() {
   const [period, setPeriod] = useState("upper");
   const activePeriod = periods[period];
 
@@ -440,6 +500,14 @@ function App() {
 
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthGate>
+      <RulesPage />
+    </AuthGate>
   );
 }
 
