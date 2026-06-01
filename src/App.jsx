@@ -94,6 +94,8 @@ const decisionRows = [
   ["TikTok賞", "採用本数", "申請本数"],
 ];
 
+const eligibilityNote = "契約終了が決まっている、または契約が即時終了した場合は受賞対象外となり、次点の人が繰り上げになります。";
+
 const awardSections = [
   {
     title: "グループ総合ランキング",
@@ -524,6 +526,9 @@ function RulesPage() {
           title="順位の決め方"
         />
         <DenseTable headers={["賞", "評価基準", "同点時"]} rows={decisionRows} />
+        <div className="mt-3 rounded-lg border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700">
+          {eligibilityNote}
+        </div>
 
         <SectionTitle
           id="awards"
