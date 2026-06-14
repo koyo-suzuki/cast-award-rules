@@ -71,6 +71,39 @@ const rankingNotes = [
   ["店舗別ランキング", "メインのお店を基準に出します。ほかのお店に出勤した分も合わせて計算します。"],
 ];
 
+const groupRankingCastNames = [
+  "一ノ瀬のあ",
+  "雅楽代みい",
+  "恵方まき",
+  "御伽めあ",
+  "ぎゃるちぃ",
+  "九嬢らいと",
+  "こあ",
+  "国宝れなち",
+  "最弱のれむ",
+  "櫻うる",
+  "さばち",
+  "式波惡",
+  "樹理穴dis子",
+  "瀬戸にゃ",
+  "てぃらの",
+  "ナツナツナツ",
+  "にゃる",
+  "ネコノメ",
+  "ネコ屋敷",
+  "猫白まりん",
+  "白桃みるあ",
+  "バリン",
+  "星宮きゅあ",
+  "観月ヱミ",
+  "夢幻たろ",
+  "桃川ももな",
+  "雪印ふう",
+  "りたぽちゃぴぱお",
+  "りつ",
+  "るいるい",
+];
+
 const attendanceRows = [
   ["当欠・2%当欠", "当日欠勤、または2%当欠にあたる休み方をしたとき", "-100,000pt", "minus"],
   ["遅刻・早退", "遅刻、または早退したとき", "-50,000pt", "minus"],
@@ -273,6 +306,18 @@ function DenseTable({ headers, rows, getTone, mobileHeaders = headers }) {
   );
 }
 
+function CastNameList({ names }) {
+  return (
+    <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 text-sm font-bold text-slate-950 sm:grid-cols-3">
+      {names.map((name) => (
+        <p key={name} className="min-w-0 border-b border-slate-100 pb-2 leading-5">
+          {name}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 function MobileAwardSection({ section }) {
   const Icon = section.icon;
 
@@ -435,10 +480,10 @@ function RulesPage() {
             キャスト表彰制度
           </a>
           <span className="hidden sm:inline-flex">
-            <Tag>更新日 2026-06-01</Tag>
+            <Tag>更新日 2026-06-14</Tag>
           </span>
           <span className="sm:hidden">
-            <Tag>6/1更新</Tag>
+            <Tag>6/14更新</Tag>
           </span>
         </div>
       </header>
@@ -457,9 +502,16 @@ function RulesPage() {
             <div key={title} className="rounded-lg border border-slate-200 bg-white p-4">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <p className="font-bold">{title}</p>
-                <Tag tone="warning">準備中</Tag>
+                <Tag tone={title === "グループ総合ランキング" ? "primary" : "warning"}>
+                  {title === "グループ総合ランキング" ? "TOP30" : "準備中"}
+                </Tag>
               </div>
-              <p className="text-sm leading-6 text-slate-600">{body}</p>
+              <p className="text-sm leading-6 text-slate-600">
+                {title === "グループ総合ランキング"
+                  ? "50音順/売上・勤怠のみ反映、投票・貢献度反映の後、順位が変わる可能性があります。"
+                  : body}
+              </p>
+              {title === "グループ総合ランキング" ? <CastNameList names={groupRankingCastNames} /> : null}
             </div>
           ))}
         </div>
